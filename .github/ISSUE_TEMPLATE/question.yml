@@ -1,0 +1,47 @@
+name: ❓ Question
+description: Ask a question about a blog post or concept.
+title: "[QUESTION]: "
+labels: ["question"]
+assignees: ["@NebulaTris"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ❓ Ask a Question
+
+        If something didn’t fully click, ask here!  
+        Good questions often lead to better blog posts.
+
+  - type: input
+    id: blog-link
+    attributes:
+      label: Related Blog (optional)
+      placeholder: https://nebulatris.co/post-name
+    validations:
+      required: false
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What are you trying to understand?
+      placeholder: I didn’t understand how X works in this section...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: What have you tried / understood so far?
+      description: Helps give a better answer
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Final Check
+      options:
+        - label: I have checked the blog but still need clarification
+          required: true

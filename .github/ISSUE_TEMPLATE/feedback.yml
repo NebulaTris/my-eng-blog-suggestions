@@ -1,0 +1,61 @@
+name: 🐛 Blog Feedback
+description: Suggest improvements, corrections, or enhancements to an existing blog.
+title: "[FEEDBACK]: "
+labels: ["feedback"]
+assignees: ["@NebulaTris"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🐛 Blog Feedback
+
+        Thanks for helping improve the blog!  
+        Even small feedback can significantly improve clarity and quality.
+
+  - type: input
+    id: blog-link
+    attributes:
+      label: Blog Link
+      placeholder: https://nebulatris.co/post-name
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: What can be improved?
+      description: Be as specific as possible
+      placeholder: This section was confusing / missing explanation / incorrect
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Improvement
+      description: How would you fix or improve it?
+      placeholder: Add a diagram / clarify with an example / restructure section
+    validations:
+      required: false
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type of Feedback
+      options:
+        - Clarity issue
+        - Missing content
+        - Incorrect information
+        - Visualization improvement
+        - Other
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Final Check
+      options:
+        - label: I have reviewed the blog and provided constructive feedback
+          required: true

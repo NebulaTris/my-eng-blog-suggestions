@@ -1,0 +1,72 @@
+name: 💡 Blog Idea
+description: Suggest a new concept, system deep dive, or interactive blog idea.
+title: "[IDEA]: "
+labels: ["idea", "brainstorming"]
+assignees: ["@NebulaTris"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 💡 Suggest a Blog Idea
+
+        Thanks for contributing! This blog focuses on **deep, visual, and intuitive explanations of engineering concepts**.
+
+        Good ideas usually:
+        - break down complex systems
+        - explain “how things actually work”
+        - can be visualized or made interactive
+
+  - type: textarea
+    id: core-idea
+    attributes:
+      label: Core Idea
+      description: What concept/system/topic should be covered?
+      placeholder: e.g. How a RAG pipeline works end-to-end with real latency tradeoffs
+    validations:
+      required: true
+
+  - type: textarea
+    id: depth
+    attributes:
+      label: What should be explained deeply?
+      description: Which part is usually confusing or overlooked?
+      placeholder: e.g. chunking strategies, retrieval quality, embedding tradeoffs
+    validations:
+      required: false
+
+  - type: textarea
+    id: visualization
+    attributes:
+      label: Visualization / Interaction Ideas
+      description: How could this be made visual or interactive?
+      placeholder: e.g. scroll-based pipeline animation, sliders for chunk size impact
+    validations:
+      required: false
+
+  - type: dropdown
+    id: level
+    attributes:
+      label: Target Level
+      options:
+        - Beginner
+        - Intermediate
+        - Advanced
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Links, references, examples, or anything helpful
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Final Check
+      options:
+        - label: This idea fits a deep, visual, or intuitive engineering explanation
+          required: true
