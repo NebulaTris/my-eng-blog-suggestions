@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="An orbiting idea">
+  <!-- Soft halo -->
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e8855a" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#e8855a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="120" cy="120" r="110" fill="url(#halo)"/>
+
+  <!-- Orbit ring -->
+  <circle cx="120" cy="120" r="80" fill="none" stroke="#e8e4d9" stroke-width="0.8" opacity="0.18" stroke-dasharray="3 5"/>
+  <circle cx="120" cy="120" r="55" fill="none" stroke="#7f77dd" stroke-width="0.8" opacity="0.35"/>
+
+  <!-- Core "idea" — a gently breathing coral disc with a lightbulb glyph -->
+  <g transform="translate(120 120)">
+    <circle r="36" fill="#0e0e18" stroke="#e8855a" stroke-width="2">
+      <animate attributeName="r" values="36;38;36" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M -10 -11 Q -10 -19 0 -19 Q 10 -19 10 -11 Q 10 -4 6 0 L 6 7 L -6 7 L -6 0 Q -10 -4 -10 -11 Z"
+          fill="none" stroke="#e8855a" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="-4" y1="11" x2="4" y2="11" stroke="#e8855a" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="-3" y1="14" x2="3" y2="14" stroke="#e8855a" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- spark -->
+    <circle cx="0" cy="-12" r="2" fill="#e8855a">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Orbiting tag chips -->
+  <g>
+    <circle r="5" fill="#5dcaa5">
+      <animateMotion dur="11s" repeatCount="indefinite" path="M 80 0 A 80 80 0 1 1 -80 0 A 80 80 0 1 1 80 0" rotate="auto"/>
+    </circle>
+  </g>
+  <g>
+    <circle r="4" fill="#7f77dd">
+      <animateMotion dur="8s" repeatCount="indefinite" path="M 55 0 A 55 55 0 1 0 -55 0 A 55 55 0 1 0 55 0" rotate="auto"/>
+    </circle>
+  </g>
+
+  <!-- Tiny twinkles -->
+  <g fill="#e8e4d9">
+    <circle cx="40"  cy="50"  r="1"><animate attributeName="opacity" values="0.2;1;0.2" dur="3s"   repeatCount="indefinite"/></circle>
+    <circle cx="200" cy="60"  r="1"><animate attributeName="opacity" values="0.4;1;0.4" dur="2.6s" repeatCount="indefinite"/></circle>
+    <circle cx="50"  cy="200" r="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="3.4s" repeatCount="indefinite"/></circle>
+    <circle cx="195" cy="190" r="1"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.8s" repeatCount="indefinite"/></circle>
+  </g>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Issue lifecycle: idea, brainstorming, planned, in-progress, published">
+  <defs>
+    <linearGradient id="bgFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#08080e" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#08080e" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="200" fill="url(#bgFade)"/>
+
+  <!-- Connecting dashed track -->
+  <line x1="120" y1="80" x2="1080" y2="80" stroke="#e8e4d9" stroke-width="1" opacity="0.18" stroke-dasharray="6 6"/>
+
+  <!-- Glowing trail behind pulse -->
+  <circle cy="80" r="14" fill="#e8855a" opacity="0">
+    <animate attributeName="cx" values="120;1080" dur="9s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.22;0.22;0" dur="9s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Traveling pulse -->
+  <circle cy="80" r="4" fill="#e8855a">
+    <animate attributeName="cx" values="120;1080" dur="9s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0" dur="9s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- 1. idea — coral lightbulb -->
+  <g transform="translate(120, 80)">
+    <circle r="28" fill="#0e0e18" stroke="#e8855a" stroke-width="2"/>
+    <path d="M -7 -8 Q -7 -14 0 -14 Q 7 -14 7 -8 Q 7 -3 4 0 L 4 5 L -4 5 L -4 0 Q -7 -3 -7 -8 Z" fill="none" stroke="#e8855a" stroke-width="1.6" stroke-linejoin="round"/>
+    <line x1="-3" y1="8" x2="3" y2="8" stroke="#e8855a" stroke-width="1.6" stroke-linecap="round"/>
+    <circle cx="0" cy="-8" r="2" fill="#e8855a">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <text x="120" y="140" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#e8e4d9">idea</text>
+  <text x="120" y="160" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#e8e4d9" opacity="0.55">opened</text>
+
+  <!-- 2. brainstorming — purple cluster -->
+  <g transform="translate(360, 80)">
+    <circle r="28" fill="#0e0e18" stroke="#7f77dd" stroke-width="2"/>
+    <circle cx="-6" cy="-4" r="3" fill="#7f77dd">
+      <animate attributeName="cy" values="-4;-7;-4" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="6" cy="-2" r="3" fill="#7f77dd">
+      <animate attributeName="cy" values="-2;-5;-2" dur="2.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="-2" cy="6" r="3" fill="#7f77dd">
+      <animate attributeName="cy" values="6;3;6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <text x="360" y="140" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#e8e4d9">brainstorming</text>
+  <text x="360" y="160" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#e8e4d9" opacity="0.55">shaping</text>
+
+  <!-- 3. planned — teal pin -->
+  <g transform="translate(600, 80)">
+    <circle r="28" fill="#0e0e18" stroke="#5dcaa5" stroke-width="2"/>
+    <circle cx="0" cy="-4" r="6" fill="none" stroke="#5dcaa5" stroke-width="1.6"/>
+    <circle cx="0" cy="-4" r="2" fill="#5dcaa5"/>
+    <line x1="0" y1="2" x2="0" y2="11" stroke="#5dcaa5" stroke-width="1.6" stroke-linecap="round"/>
+    <line x1="-3" y1="11" x2="3" y2="11" stroke="#5dcaa5" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+  <text x="600" y="140" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#e8e4d9">planned</text>
+  <text x="600" y="160" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#e8e4d9" opacity="0.55">scheduled</text>
+
+  <!-- 4. in-progress — gold spinner -->
+  <g transform="translate(840, 80)">
+    <circle r="28" fill="#0e0e18" stroke="#f5c842" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="3s" repeatCount="indefinite"/>
+      <circle r="10" fill="none" stroke="#f5c842" stroke-width="2" stroke-dasharray="22 40" stroke-linecap="round"/>
+    </g>
+    <circle r="2.5" fill="#f5c842"/>
+  </g>
+  <text x="840" y="140" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#e8e4d9">in-progress</text>
+  <text x="840" y="160" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#e8e4d9" opacity="0.55">writing</text>
+
+  <!-- 5. published — teal checkmark, draws in -->
+  <g transform="translate(1080, 80)">
+    <circle r="28" fill="#0e0e18" stroke="#5dcaa5" stroke-width="2">
+      <animate attributeName="stroke" values="#5dcaa5;#e8e4d9;#5dcaa5" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M -8 0 L -2 6 L 8 -6" fill="none" stroke="#5dcaa5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="30" stroke-dashoffset="30">
+      <animate attributeName="stroke-dashoffset" values="30;0;0;30" keyTimes="0;0.3;0.85;1" dur="4s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  <text x="1080" y="140" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#e8e4d9">published</text>
+  <text x="1080" y="160" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#e8e4d9" opacity="0.55">shipped</text>
+</svg>

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid meet" role="img" aria-label="nebulatris.co — the public idea desk">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#08080e"/>
+      <stop offset="100%" stop-color="#0e0e18"/>
+    </linearGradient>
+    <radialGradient id="coralGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e8855a" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#e8855a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="purpleGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7f77dd" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#7f77dd" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tealGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5dcaa5" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#5dcaa5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Cosmic background -->
+  <rect width="1200" height="320" fill="url(#bg)"/>
+  <ellipse cx="600" cy="170" rx="620" ry="130" fill="url(#coralGlow)"/>
+  <ellipse cx="220" cy="110" rx="320" ry="90" fill="url(#purpleGlow)"/>
+  <ellipse cx="980" cy="220" rx="280" ry="80" fill="url(#tealGlow)"/>
+
+  <!-- Twinkling stars -->
+  <g fill="#e8e4d9">
+    <circle cx="80"   cy="50"  r="1.2"><animate attributeName="opacity" values="0.2;1;0.2"   dur="3.5s" repeatCount="indefinite"/></circle>
+    <circle cx="180"  cy="80"  r="0.8"><animate attributeName="opacity" values="0.4;1;0.4"   dur="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="290"  cy="40"  r="1.0"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="4s"   repeatCount="indefinite"/></circle>
+    <circle cx="380"  cy="90"  r="1.3"><animate attributeName="opacity" values="0.2;1;0.2"   dur="3s"   begin="0.5s" repeatCount="indefinite"/></circle>
+    <circle cx="60"   cy="200" r="1.0"><animate attributeName="opacity" values="0.3;1;0.3"   dur="4s"   begin="1.5s" repeatCount="indefinite"/></circle>
+    <circle cx="150"  cy="260" r="0.9"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="3s"   repeatCount="indefinite"/></circle>
+    <circle cx="240"  cy="290" r="1.0"><animate attributeName="opacity" values="0.3;1;0.3"   dur="3.6s" begin="0.4s" repeatCount="indefinite"/></circle>
+    <circle cx="430"  cy="50"  r="0.9"><animate attributeName="opacity" values="0.4;1;0.4"   dur="2.8s" repeatCount="indefinite"/></circle>
+    <circle cx="500"  cy="280" r="1.1"><animate attributeName="opacity" values="0.3;1;0.3"   dur="3.2s" repeatCount="indefinite"/></circle>
+    <circle cx="780"  cy="60"  r="1.0"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="3.4s" begin="0.8s" repeatCount="indefinite"/></circle>
+    <circle cx="900"  cy="40"  r="0.9"><animate attributeName="opacity" values="0.3;1;0.3"   dur="3.2s" repeatCount="indefinite"/></circle>
+    <circle cx="1100" cy="40"  r="0.8"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="3.6s" repeatCount="indefinite"/></circle>
+    <circle cx="1140" cy="120" r="1.0"><animate attributeName="opacity" values="0.5;1;0.5"   dur="2s"   repeatCount="indefinite"/></circle>
+    <circle cx="1080" cy="240" r="1.2"><animate attributeName="opacity" values="0.4;1;0.4"   dur="2.6s" repeatCount="indefinite"/></circle>
+    <circle cx="1130" cy="280" r="0.9"><animate attributeName="opacity" values="0.3;1;0.3"   dur="3.4s" begin="0.8s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- Wandering comet -->
+  <g opacity="0.7">
+    <circle r="2" fill="#e8855a">
+      <animateMotion dur="14s" repeatCount="indefinite" path="M -50 70 Q 300 30 700 110 T 1250 90"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="14s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Orbiting planet system on the right -->
+  <g transform="translate(1020, 165)">
+    <ellipse rx="80" ry="20" fill="none" stroke="#7f77dd" stroke-width="0.6" opacity="0.45"/>
+    <ellipse rx="55" ry="14" fill="none" stroke="#5dcaa5" stroke-width="0.6" opacity="0.5"/>
+    <!-- Planet body, gentle pulse -->
+    <circle r="22" fill="#e8855a" opacity="0.9">
+      <animate attributeName="r" values="22;23.2;22" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="-7" cy="-5" r="6" fill="#08080e" opacity="0.35"/>
+    <!-- Outer moon -->
+    <circle r="3" fill="#e8e4d9">
+      <animateMotion dur="9s" repeatCount="indefinite" path="M 80 0 A 80 20 0 1 1 -80 0 A 80 20 0 1 1 80 0"/>
+    </circle>
+    <!-- Inner moon -->
+    <circle r="2" fill="#5dcaa5">
+      <animateMotion dur="6s" repeatCount="indefinite" path="M 55 0 A 55 14 0 1 0 -55 0 A 55 14 0 1 0 55 0"/>
+    </circle>
+  </g>
+
+  <!-- Title block -->
+  <g>
+    <text x="600" y="155" text-anchor="middle" font-family="Georgia, 'Playfair Display', serif" font-size="64" font-style="italic" font-weight="500" fill="#e8e4d9" opacity="0">
+      <animate attributeName="opacity" values="0;1" dur="1.2s" begin="0.2s" fill="freeze"/>
+      nebulatris.co
+    </text>
+
+    <line x1="500" y1="178" x2="700" y2="178" stroke="#e8855a" stroke-width="1" opacity="0">
+      <animate attributeName="opacity" values="0;0.6" dur="0.8s" begin="1s" fill="freeze"/>
+    </line>
+
+    <text x="600" y="208" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" letter-spacing="6" font-weight="500" fill="#e8855a" opacity="0">
+      <animate attributeName="opacity" values="0;1" dur="1s" begin="1.2s" fill="freeze"/>
+      THE  PUBLIC  IDEA  DESK
+    </text>
+
+    <text x="600" y="245" text-anchor="middle" font-family="Georgia, 'Playfair Display', serif" font-size="14" font-style="italic" fill="#e8e4d9" opacity="0">
+      <animate attributeName="opacity" values="0;0.65" dur="1s" begin="1.6s" fill="freeze"/>
+      every issue here is a thread on the blog's roadmap
+    </text>
+  </g>
+</svg>
