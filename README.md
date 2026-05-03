@@ -1,6 +1,8 @@
 <div align="center">
 
+<a href="https://nebulatris.co/">
 <img src="./.github/assets/banner.svg" alt="nebulatris.co — the public idea desk" width="100%" />
+</a>
 
 <br />
 
