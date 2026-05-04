@@ -1,0 +1,130 @@
+name: Issue Manager
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  manage_issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Process Issue
+        uses: actions/github-script@v7
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const labels = issue.labels.map(l => l.name.toLowerCase());
+
+            const isIdea = labels.includes('idea') || (issue.title && issue.title.toLowerCase().includes('[idea]'));
+            const isFeedback = labels.includes('feedback') || (issue.title && issue.title.toLowerCase().includes('[feedback]'));
+            const isQuestion = labels.includes('question') || (issue.title && issue.title.toLowerCase().includes('[question]'));
+
+            let issueType = '';
+            if (isIdea) issueType = 'idea';
+            else if (isFeedback) issueType = 'feedback';
+            else if (isQuestion) issueType = 'question';
+
+            if (!issueType) {
+              console.log("Not an idea, feedback, or question issue. Skipping.");
+              return;
+            }
+
+            // 1. Add +1 reaction on creation (only for ideas)
+            if (isIdea && context.payload.action === 'opened') {
+              try {
+                await github.rest.reactions.createForIssue({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  content: '+1',
+                });
+                console.log("Added +1 reaction for idea.");
+              } catch (e) {
+                console.log("Failed to add reaction:", e);
+              }
+            }
+
+            // 2. Validate content
+            const title = issue.title;
+            const body = issue.body || '';
+
+            const apiKey = process.env.GEMINI_API_KEY;
+            if (!apiKey) {
+              console.log("No GEMINI_API_KEY found in secrets. Skipping AI moderation.");
+              return;
+            }
+
+            console.log(`Analyzing issue content with Gemini for type: ${issueType}...`);
+
+            let rules = "";
+            if (issueType === 'idea') {
+              rules = `
+              1. Explicit, offensive, or inappropriate.
+              2. Completely random words, gibberish, or clearly spam.
+              3. Not a reasonable idea at all.`;
+            } else if (issueType === 'feedback') {
+              rules = `
+              1. Explicit, offensive, or inappropriate.
+              2. Completely random words, gibberish, or illegible.
+              3. "Bad and critical" feedback that is NOT constructive criticism (e.g., just insults or complaints without any substance or suggestion).`;
+            } else if (issueType === 'question') {
+              rules = `
+              1. Explicit, offensive, or inappropriate.
+              2. Completely random words, gibberish, or illegible.
+              3. Not an actual question.`;
+            }
+
+            const prompt = `You are a moderator for a GitHub repository. Review the following issue submitted as a "${issueType}".
+            Title: ${title}
+            Body: ${body}
+
+            Determine if this issue is:
+            ${rules}
+
+            If it violates any of these, it is invalid. Otherwise, it is valid.
+            Reply strictly with a JSON object: {"valid": true} if it's fine, or {"valid": false, "reason": "Short explanation of why it was rejected"} if it violates the rules.`;
+
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: { response_mime_type: 'application/json' }
+              })
+            });
+            
+            const data = await res.json();
+
+            try {
+              const text = data.candidates[0].content.parts[0].text;
+              const result = JSON.parse(text);
+              
+              if (!result.valid) {
+                console.log("Issue flagged as invalid. Closing...");
+                
+                // Add a comment
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: `Hi @${issue.user.login}, thanks for your submission. Our automated moderation has flagged this issue as invalid for the following reason:\n\n> ${result.reason}\n\nThe issue will be closed. If you believe this is a mistake, please reach out to the maintainer.`
+                });
+                
+                // Close the issue
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed'
+                });
+              } else {
+                console.log("Issue is valid.");
+              }
+            } catch(e) {
+              console.log("Error parsing AI response or taking action:", e);
+              console.log("Raw response data:", JSON.stringify(data));
+            }
