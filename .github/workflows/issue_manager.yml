@@ -104,18 +104,48 @@ jobs:
 
             console.log(`Using dynamic model: ${validModel.name}`);
 
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/${validModel.name}:generateContent?key=${apiKey}`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                contents: [{ parts: [{ text: prompt }] }],
-                generationConfig: { response_mime_type: 'application/json' }
-              })
-            });
-            
-            const data = await res.json();
+            let retries = 5;
+            let data = null;
+            let success = false;
+
+            for (let i = 0; i < retries; i++) {
+              console.log(`Attempt ${i + 1} to call Gemini API...`);
+              const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/${validModel.name}:generateContent?key=${apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  contents: [{ parts: [{ text: prompt }] }],
+                  generationConfig: { response_mime_type: 'application/json' }
+                })
+              });
+              
+              data = await res.json();
+
+              if (!data.error) {
+                success = true;
+                break;
+              }
+
+              console.log(`API returned an error (Attempt ${i + 1}):`, data.error.message);
+              if (i < retries - 1) {
+                const delay = Math.pow(2, i) * 2000; // 2s, 4s, 8s, 16s
+                console.log(`Waiting ${delay}ms before retrying...`);
+                await new Promise(r => setTimeout(r, delay));
+              }
+            }
+
+            if (!success) {
+              console.log("Failed to get a successful response from Gemini API after multiple retries.");
+              console.log("Final error data:", JSON.stringify(data));
+              throw new Error("Gemini API failed to respond successfully.");
+            }
 
             try {
+              if (!data.candidates || data.candidates.length === 0) {
+                console.log("No candidates returned from API. Raw data:", JSON.stringify(data));
+                return;
+              }
+              
               const text = data.candidates[0].content.parts[0].text;
               const result = JSON.parse(text);
               
